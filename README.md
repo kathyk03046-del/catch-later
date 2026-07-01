@@ -1,8 +1,9 @@
 # catch-later
 
-A thought buffer with voice capture. Speak a thought, let AI process it, review when you're free.
+A voice-first thought buffer for macOS. Speak a thought, let AI process it, review when you're free.
 
-**Version:** 1.0.0-mvp  
+**Platform:** macOS only  
+**Mode:** Local dev — no binary release yet  
 **License:** MIT
 
 ---
@@ -17,7 +18,7 @@ Most note apps solve the wrong problem. They optimize for organization, not for 
 
 ## What catch-later Does
 
-One tap to record. GPT-4o-mini processes the transcript into a structured entry. When you have time, open the buffer, decide what to do with each item, mark it done.
+Hold Space to record. GPT-4o processes the transcript into a structured entry. When you have time, open the buffer, decide what to do with each item, mark it done.
 
 The core loop: **capture → process → review → clear.**
 
@@ -30,62 +31,95 @@ catch-later has no folders, no tags, no search. It holds thoughts temporarily un
 
 **Two action types only**  
 `execute` — there is a clear next action.  
-`keep` — everything else: ideas, references, things to think about later.  
-A third category (think vs. reference) was considered and rejected — both map to the same user behavior: leave it for later.
+`keep` — everything else: ideas, references, things to think about later.
 
 **Agent processes, user decides**  
-The AI summarizes and classifies but does not act. Every entry requires a human decision: Done, Skip, or Delete. Removing this confirmation step would eliminate the cognitive value of the review session.
+The AI summarizes and classifies but does not act. Every entry requires a human decision: Done or Delete.
 
 **Local storage, no backend**  
-Data lives in IndexedDB. No account, no sync, no server. For a single-user thought buffer, this is sufficient. Cloud sync is a future decision, not an MVP requirement.
-
-**Layered architecture**  
-
-```
-agent/      → Claude API only. No UI, no DB awareness.
-services/   → IndexedDB only. No agent awareness.
-hooks/      → Bridge between services and components.
-components/ → UI only. No direct DB or API calls.
-```
-
-Each layer has one job. Changes in one layer do not propagate to others.
+Data lives in IndexedDB. No account, no sync, no server.
 
 ---
 
 ## Stack
 
-- React + Vite + Tauri
-- OpenAI Whisper for voice transcription
-- OpenAI GPT-4o-mini for transcript processing
-- Dexie.js for IndexedDB
+- React + Vite + Tauri 2
+- OpenAI Whisper (voice transcription)
+- OpenAI GPT-4o (transcript processing)
+- Dexie.js (IndexedDB)
 
 ---
 
 ## Running Locally
 
+### Prerequisites
+
+- Node.js 18+
+- Rust + Cargo — install from [rustup.rs](https://rustup.rs)
+- Xcode Command Line Tools (`xcode-select --install`)
+
+### Setup
+
 ```bash
-git clone https://github.com/kathyk03046-del/pocket-app
-cd pocket-app
+git clone https://github.com/kathyk03046-del/catch-later
+cd catch-later
 npm install
 ```
 
-Get an OpenAI API key from [platform.openai.com](https://platform.openai.com) and create a `.env` file:
+Create a `.env` file with your own OpenAI API key:
 
 ```
 VITE_OPENAI_API_KEY=your_openai_api_key_here
 ```
 
+Get a key at [platform.openai.com](https://platform.openai.com). The app uses Whisper and GPT-4o — make sure your account has credits.
+
 ```bash
-npm run dev       # browser (web)
-npx tauri dev     # desktop app
+npx tauri dev
 ```
+
+### Accessibility Permission (required)
+
+The global shortcut (`Cmd+Shift+M`) requires Accessibility access. After first launch:
+
+1. Go to **System Settings → Privacy & Security → Accessibility**
+2. Click `+` and navigate to `src-tauri/target/debug/app`
+3. Add it and toggle it on
+
+> Note: every time the app recompiles, macOS may revoke this permission. If the shortcut stops working, re-toggle it in Accessibility settings.
+
+---
+
+## Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Cmd+Shift+M` | Show / hide the window (global, works from any app) |
+| `Space` (hold) | Start recording |
+| `Space` (release) | Stop recording and process |
+| `Esc` | Hide the window |
+
+---
+
+## Troubleshooting
+
+**Shortcut doesn't work from other apps**  
+Check Accessibility permission (see above). After recompile, you may need to re-toggle it.
+
+**"OpenAI quota exceeded — check billing"**  
+Your API key is out of credits. Add credits at [platform.openai.com/settings/billing](https://platform.openai.com/settings/billing).
+
+**Window appears behind Dock**  
+Known issue in dev mode — Dock height is estimated. Will be fixed in packaged release.
 
 ---
 
 ## Status
 
-MVP. Core loop is functional. Known limitations:
+Dev mode only. Core loop is functional.
 
-- Voice recognition accuracy degrades with mixed-language input
+Known limitations:
+- Global shortcut requires manual Accessibility permission after each recompile
 - No cross-device sync
 - No export
+- macOS only

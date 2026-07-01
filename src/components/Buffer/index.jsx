@@ -10,12 +10,7 @@ export default function Buffer() {
   });
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      background: '#060606',
-    }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Header */}
       <div style={{
         display: 'flex',
@@ -24,7 +19,7 @@ export default function Buffer() {
         padding: '16px 24px 10px',
         flexShrink: 0,
       }}>
-        <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,252,242,0.75)' }}>
+        <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>
           Buffer
         </span>
         <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)' }}>
@@ -41,21 +36,12 @@ export default function Buffer() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: 6,
           }}>
-            <div style={{
-              width: 60,
-              height: 60,
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(238,234,222,0.15) 0%, transparent 70%)',
-              filter: 'blur(12px)',
-              '--breath-lo': '0.4',
-              '--breath-hi': '0.7',
-              animation: 'breathe 4s ease-in-out infinite',
-            }} />
-            <span style={{ fontSize: 15, fontWeight: 300, color: 'rgba(255,255,255,0.25)', marginTop: 16 }}>
+            <span style={{ fontSize: 14, fontWeight: 300, color: 'rgba(255,255,255,0.25)' }}>
               all clear
             </span>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.12)', marginTop: 6 }}>
+            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.12)' }}>
               nothing pending
             </span>
           </div>
@@ -67,7 +53,7 @@ export default function Buffer() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 gap: 12,
-                padding: '16px 8px 14px',
+                padding: '14px 8px',
                 borderTop: i === 0 ? '0.5px solid rgba(255,255,255,0.06)' : 'none',
                 borderBottom: '0.5px solid rgba(255,255,255,0.06)',
               }}
@@ -75,7 +61,7 @@ export default function Buffer() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
                   fontSize: 9,
-                  color: 'rgba(255,255,255,0.28)',
+                  color: entry.action_type === 'execute' ? '#8ECBA8' : 'rgba(255,255,255,0.2)',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   marginBottom: 6,
@@ -85,7 +71,7 @@ export default function Buffer() {
                 <div style={{
                   fontSize: 13,
                   fontWeight: 300,
-                  color: entry.action_type === 'execute' ? 'rgba(248,244,234,0.92)' : 'rgba(248,244,234,0.65)',
+                  color: entry.action_type === 'execute' ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.4)',
                   lineHeight: 1.5,
                   letterSpacing: '-0.01em',
                 }}>
@@ -104,9 +90,9 @@ export default function Buffer() {
                   onClick={() => markDone(entry.id)}
                   style={{
                     fontSize: 11,
-                    color: 'rgba(248,244,234,0.7)',
-                    background: 'rgba(255,255,255,0.08)',
-                    border: '0.5px solid rgba(255,255,255,0.12)',
+                    color: 'rgba(255,255,255,0.5)',
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '0.5px solid rgba(255,255,255,0.1)',
                     borderRadius: 100,
                     padding: '4px 10px',
                     cursor: 'pointer',

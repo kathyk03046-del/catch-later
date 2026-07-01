@@ -13,8 +13,7 @@ function Nav() {
   return (
     <nav style={{
       display: 'flex',
-      borderBottom: '0.5px solid rgba(255,255,255,0.06)',
-      background: '#060606',
+      background: 'transparent',
       flexShrink: 0,
     }}>
       {[
@@ -41,7 +40,7 @@ function Nav() {
               fontSize: 13,
               letterSpacing: '-0.01em',
               fontWeight: isActive ? 500 : 400,
-              color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.2)',
+              color: isActive ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.25)',
               background: isActive ? 'rgba(255,255,255,0.08)' : 'transparent',
               borderRadius: '8px 8px 0 0',
               transition: 'all 0.15s ease',
@@ -94,10 +93,14 @@ export default function App() {
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100svh',
-        background: '#060606',
-        fontFamily: "-apple-system, 'SF Pro Text', sans-serif",
+        margin: '10px',
+        width: 'calc(100vw - 20px)',
+        height: 'calc(100vh - 20px)',
+        borderRadius: '22px',
         overflow: 'hidden',
+        overflowY: 'hidden',
+        background: '#1C1C1E',
+        fontFamily: "-apple-system, 'SF Pro Text', sans-serif",
       }}>
         <Nav />
         <main style={{ flex: 1, overflow: 'hidden' }}>

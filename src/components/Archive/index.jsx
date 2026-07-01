@@ -8,12 +8,7 @@ export default function Archive() {
   const { doneEntries, deleteEntry } = useEntries();
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      background: '#060606',
-    }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Header */}
       <div style={{
         display: 'flex',
@@ -22,7 +17,7 @@ export default function Archive() {
         padding: '16px 24px 10px',
         flexShrink: 0,
       }}>
-        <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,252,242,0.75)' }}>
+        <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>
           Archive
         </span>
       </div>
@@ -48,7 +43,7 @@ export default function Archive() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 gap: 12,
-                padding: '16px 8px 14px',
+                padding: '14px 8px',
                 borderTop: i === 0 ? '0.5px solid rgba(255,255,255,0.06)' : 'none',
                 borderBottom: '0.5px solid rgba(255,255,255,0.06)',
               }}
@@ -56,7 +51,7 @@ export default function Archive() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{
                   fontSize: 9,
-                  color: 'rgba(255,255,255,0.28)',
+                  color: entry.action_type === 'execute' ? '#8ECBA8' : 'rgba(255,255,255,0.2)',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   marginBottom: 6,
@@ -66,7 +61,7 @@ export default function Archive() {
                 <div style={{
                   fontSize: 13,
                   fontWeight: 300,
-                  color: 'rgba(248,244,234,0.82)',
+                  color: 'rgba(255,255,255,0.6)',
                   lineHeight: 1.5,
                   letterSpacing: '-0.01em',
                 }}>

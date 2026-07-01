@@ -1,8 +1,14 @@
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+
+html, body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
 
 body {
   margin: 0;
-  background: #060606;
+  background: transparent;
   font-family: -apple-system, 'SF Pro Text', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,6 +29,11 @@ body {
 @keyframes breatheFast {
   0%, 100% { opacity: var(--breath-lo); transform: translate(-50%, -50%) scale(1); }
   50%       { opacity: var(--breath-hi); transform: translate(-50%, -50%) scale(1.10); }
+}
+
+@keyframes processingPulse {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.35; }
 }
 
 @keyframes barBounce {
