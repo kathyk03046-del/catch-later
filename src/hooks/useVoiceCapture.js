@@ -15,7 +15,7 @@ export function useVoiceCapture() {
     if (!SpeechRecognition) return;
 
     const recognition = new SpeechRecognition();
-    recognition.lang = 'zh-CN';
+    recognition.lang = 'en-US';
     recognition.continuous = false;
     recognition.interimResults = true;
 
