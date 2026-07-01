@@ -10,13 +10,15 @@ Your job:
 Respond ONLY in JSON. No explanation, no markdown, no backticks.
 
 {
-  "summary": "one clear sentence of what this is about",
+  "summary": "max 200 characters, preserving key specifics",
   "action_type": "execute|keep",
   "next_action": "string or null"
 }
 
 Rules:
 - always respond in English regardless of input language
+- summary must be max 200 characters
+- summary must preserve ALL specific details: names, timestamps, locations, source, intended use — these are retrieval anchors, never drop them
 - be conservative with execute: only use it if there is an obvious action
 - never add interpretation beyond what the user said
 - never return anything outside the JSON object`;
